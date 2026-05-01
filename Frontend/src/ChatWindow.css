@@ -37,6 +37,9 @@
 [data-theme="arctic"] .info { color: #607080; }
 [data-theme="arctic"] #submit i { color: #1a7fb5; }
 [data-theme="arctic"] .themeToggle { color: #1a2530; }
+[data-theme="arctic"] .chatWindow h1,
+[data-theme="arctic"] .chatWindow h2,
+[data-theme="arctic"] .chatWindow p { color: #1a2530; }
 
 /* Rose Petal */
 [data-theme="rose"] .chatWindow { background-color: #fff5f7; color: #3d1a24; }
@@ -44,7 +47,9 @@
 [data-theme="rose"] input { background-color: #ffffff; color: #3d1a24; }
 [data-theme="rose"] .info { color: #996070; }
 [data-theme="rose"] #submit i { color: #d4547e; }
-[data-theme="rose"] .themeToggle { color: #3d1a24; }
+[data-theme="rose"] .themeToggle { color: #3d1a24; }[data-theme="rose"] .chatWindow h1,
+[data-theme="rose"] .chatWindow h2,
+[data-theme="rose"] .chatWindow p { color: #3d1a24; }
 
 
 

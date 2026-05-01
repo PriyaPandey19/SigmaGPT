@@ -82,7 +82,6 @@ function ChatWindow() {
       <div className='navRight'>
         <button className='themeToggle' onClick={toggleTheme} title={theme}>
             {theme === "dark" ? <i className="fa-solid fa-moon"></i>
-             : theme === "light" ? <i className="fa-solid fa-sun"></i>
              : <i className="fa-solid fa-palette"></i>}
           </button>
 

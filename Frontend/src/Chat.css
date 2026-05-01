@@ -50,3 +50,21 @@
 pre{
     white-space: pre-wrap;
 }
+
+[data-theme="ocean"] .userMessage { background-color: #1b2e4b; color: #ccd6f6; }
+[data-theme="ocean"] .gptDiv { color: #ccd6f6; }
+
+[data-theme="forest"] .userMessage { background-color: #253025; color: #d4e8c2; }
+[data-theme="forest"] .gptDiv { color: #d4e8c2; }
+
+[data-theme="sunset"] .userMessage { background-color: #33221a; color: #f5dbc1; }
+[data-theme="sunset"] .gptDiv { color: #f5dbc1; }
+
+[data-theme="purple"] .userMessage { background-color: #241a40; color: #e0d4f7; }
+[data-theme="purple"] .gptDiv { color: #e0d4f7; }
+
+[data-theme="arctic"] .userMessage { background-color: #c8d8e8; color: #1a2530; }
+[data-theme="arctic"] .gptDiv { color: #1a2530; }
+
+[data-theme="rose"] .userMessage { background-color: #ffd0d8; color: #3d1a24; }
+[data-theme="rose"] .gptDiv { color: #3d1a24; }

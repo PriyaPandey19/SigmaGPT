@@ -1,3 +1,49 @@
+/* Ocean Night */
+[data-theme="ocean"] .sidebar { background-color: #112240; color: #ccd6f6; }
+[data-theme="ocean"] .sidebar button { border-color: rgba(100, 255, 218, 0.3); }
+[data-theme="ocean"] .sidebar .sign { border-color: rgba(100, 255, 218, 0.2); }
+[data-theme="ocean"] .sidebar .highlighted { background-color: #1b2e4b; }
+
+/* Forest Dark */
+[data-theme="forest"] .sidebar { background-color: #1e2d1e; color: #d4e8c2; }
+[data-theme="forest"] .sidebar button { border-color: rgba(126, 200, 116, 0.3); }
+[data-theme="forest"] .sidebar .sign { border-color: rgba(126, 200, 116, 0.2); }
+[data-theme="forest"] .sidebar .highlighted { background-color: #253025; }
+
+/* Sunset Warm */
+[data-theme="sunset"] .sidebar { background-color: #261a14; color: #f5dbc1; }
+[data-theme="sunset"] .sidebar button { border-color: rgba(255, 140, 66, 0.3); }
+[data-theme="sunset"] .sidebar .sign { border-color: rgba(255, 140, 66, 0.2); }
+[data-theme="sunset"] .sidebar .highlighted { background-color: #33221a; }
+
+/* Purple Haze */
+[data-theme="purple"] .sidebar { background-color: #1a1230; color: #e0d4f7; }
+[data-theme="purple"] .sidebar button { border-color: rgba(180, 138, 255, 0.3); }
+[data-theme="purple"] .sidebar .sign { border-color: rgba(180, 138, 255, 0.2); }
+[data-theme="purple"] .sidebar .highlighted { background-color: #241a40; }
+
+/* Arctic Light */
+[data-theme="arctic"] .sidebar { background-color: #dde8f0; color: #1a2530; }
+[data-theme="arctic"] .sidebar button { border-color: rgba(26, 127, 181, 0.3); color: #1a2530; }
+[data-theme="arctic"] .sidebar .sign { border-color: rgba(26, 127, 181, 0.2); }
+[data-theme="arctic"] .sidebar .highlighted { background-color: #c8d8e8; }
+[data-theme="arctic"] .history li:hover { background-color: rgba(0, 0, 0, 0.05); }
+[data-theme="arctic"] .fa-trash { color: #1a2530; }
+[data-theme="arctic"] .sidebar { background-color: #dde8f0; color: #1a2530; }
+[data-theme="arctic"] .history li { color: #1a2530; }
+
+/* Rose Petal */
+[data-theme="rose"] .sidebar { background-color: #ffe8ed; color: #3d1a24; }
+[data-theme="rose"] .sidebar button { border-color: rgba(212, 84, 126, 0.3); color: #3d1a24; }
+[data-theme="rose"] .sidebar .sign { border-color: rgba(212, 84, 126, 0.2); }
+[data-theme="rose"] .sidebar .highlighted { background-color: #ffd0d8; }
+[data-theme="rose"] .history li:hover { background-color: rgba(0, 0, 0, 0.05); }
+[data-theme="rose"] .fa-trash { color: #3d1a24; }
+[data-theme="rose"] .sidebar { background-color: #ffe8ed; color: #3d1a24; }
+[data-theme="rose"] .history li { color: #3d1a24; }
+
+
+
 .sidebar{
     background-color: #171717;
     color: #b4b4b4;
