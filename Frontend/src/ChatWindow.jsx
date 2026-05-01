@@ -10,6 +10,21 @@ function ChatWindow() {
   const [loading, setLoading] = useState(false);
   const[isOpen, setIsOpen] = useState(false);
 
+  const themes = ["dark","light","ocean","forest","sunset","purple", "arctic","rose"];
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark");
+
+   useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+   const toggleTheme = () => {
+    setTheme(prev => {
+      const idx = themes.indexOf(prev);
+      return themes[(idx + 1) % themes.length];
+    });
+   };
+
   const getReply = async() => {
     setLoading(true);
     setNewChat(false);
@@ -63,9 +78,21 @@ function ChatWindow() {
   <div className='chatWindow'>
     <div className='navbar'>
       <span>SigmaGPT<i className="fa-solid fa-angle-down"></i></span>
+
+      <div className='navRight'>
+        <button className='themeToggle' onClick={toggleTheme} title={theme}>
+            {theme === "dark" ? <i className="fa-solid fa-moon"></i>
+             : theme === "light" ? <i className="fa-solid fa-sun"></i>
+             : <i className="fa-solid fa-palette"></i>}
+          </button>
+
+
+      
+
       <div className='userIconDiv' onClick={handleProfileClick}>
         <span className='userIcon'><i className="fa-solid fa-user"></i></span>
       </div>
+    </div>
     </div>
 
     {

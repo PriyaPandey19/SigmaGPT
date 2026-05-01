@@ -1,3 +1,55 @@
+/* Ocean Night */
+[data-theme="ocean"] .chatWindow { background-color: #0d1b2a; color: #ccd6f6; }
+[data-theme="ocean"] .dropDown { background-color: #112240; }
+[data-theme="ocean"] input { background-color: #1b2e4b; color: #ccd6f6; }
+[data-theme="ocean"] .info { color: #8892b0; }
+[data-theme="ocean"] #submit i { color: #64ffda; }
+[data-theme="ocean"] .themeToggle { color: #ccd6f6; }
+
+/* Forest Dark */
+[data-theme="forest"] .chatWindow { background-color: #1a2318; color: #d4e8c2; }
+[data-theme="forest"] .dropDown { background-color: #1e2d1e; }
+[data-theme="forest"] input { background-color: #253025; color: #d4e8c2; }
+[data-theme="forest"] .info { color: #8aad7a; }
+[data-theme="forest"] #submit i { color: #7ec874; }
+[data-theme="forest"] .themeToggle { color: #d4e8c2; }
+
+/* Sunset Warm */
+[data-theme="sunset"] .chatWindow { background-color: #1c1410; color: #f5dbc1; }
+[data-theme="sunset"] .dropDown { background-color: #261a14; }
+[data-theme="sunset"] input { background-color: #33221a; color: #f5dbc1; }
+[data-theme="sunset"] .info { color: #b88a6a; }
+[data-theme="sunset"] #submit i { color: #ff8c42; }
+[data-theme="sunset"] .themeToggle { color: #f5dbc1; }
+
+/* Purple Haze */
+[data-theme="purple"] .chatWindow { background-color: #120d1e; color: #e0d4f7; }
+[data-theme="purple"] .dropDown { background-color: #1a1230; }
+[data-theme="purple"] input { background-color: #241a40; color: #e0d4f7; }
+[data-theme="purple"] .info { color: #9070c0; }
+[data-theme="purple"] #submit i { color: #b48aff; }
+[data-theme="purple"] .themeToggle { color: #e0d4f7; }
+
+/* Arctic Light */
+[data-theme="arctic"] .chatWindow { background-color: #f0f4f8; color: #1a2530; }
+[data-theme="arctic"] .dropDown { background-color: #dde8f0; color: #1a2530; }
+[data-theme="arctic"] input { background-color: #ffffff; color: #1a2530; }
+[data-theme="arctic"] .info { color: #607080; }
+[data-theme="arctic"] #submit i { color: #1a7fb5; }
+[data-theme="arctic"] .themeToggle { color: #1a2530; }
+
+/* Rose Petal */
+[data-theme="rose"] .chatWindow { background-color: #fff5f7; color: #3d1a24; }
+[data-theme="rose"] .dropDown { background-color: #ffe8ed; color: #3d1a24; }
+[data-theme="rose"] input { background-color: #ffffff; color: #3d1a24; }
+[data-theme="rose"] .info { color: #996070; }
+[data-theme="rose"] #submit i { color: #d4547e; }
+[data-theme="rose"] .themeToggle { color: #3d1a24; }
+
+
+
+
+
 .chatWindow{
   background-color: #212121;
   height: 100vh;
