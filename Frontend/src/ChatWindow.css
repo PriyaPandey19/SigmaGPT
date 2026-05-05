@@ -41,6 +41,8 @@
 [data-theme="arctic"] .chatWindow h2,
 [data-theme="arctic"] .chatWindow p { color: #1a2530; }
 [data-theme="arctic"] .dropDownItem { color: #1a2530; }
+[data-theme="arctic"] .navbar span { color: #1a2530; }
+[data-theme="arctic"] .navbar span i { color: #1a2530; }
 
 /* Rose Petal */
 [data-theme="rose"] .chatWindow { background-color: #fff5f7; color: #3d1a24; }
@@ -52,6 +54,8 @@
 [data-theme="rose"] .chatWindow h2,
 [data-theme="rose"] .chatWindow p { color: #3d1a24; }
 [data-theme="rose"] .dropDownItem { color: #3d1a24; }
+[data-theme="rose"] .navbar span { color: #3d1a24; }
+[data-theme="rose"] .navbar span i { color: #3d1a24; }
 
 
 

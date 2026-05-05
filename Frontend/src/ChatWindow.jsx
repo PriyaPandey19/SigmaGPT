@@ -1,14 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useRef } from 'react'
 import "./ChatWindow.css";
 import Chat from "./Chat";
 import { MyContext } from './MyContext';
 import {ScaleLoader} from "react-spinners";
 
-function ChatWindow() {
+function ChatWindow({onLogout}) {
 
   const {prompt, setPrompt, reply, setReply, currThreadId, prevChats, setPrevChats, setNewChat} = useContext(MyContext);
   const [loading, setLoading] = useState(false);
   const[isOpen, setIsOpen] = useState(false);
+  const abortControllerRef = useRef(null);
 
   const themes = ["dark","light","ocean","forest","sunset","purple", "arctic","rose"];
   const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark");
@@ -28,17 +29,22 @@ function ChatWindow() {
   const getReply = async() => {
     setLoading(true);
     setNewChat(false);
+    const token = localStorage.getItem("token");
+
+    abortControllerRef.current = new AbortController();
 
     console.log("message", prompt, "threadId", currThreadId )
     const options = {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
       },
       body: JSON.stringify({
         message: prompt,
         threadId: currThreadId
-      })
+      }),
+      signal: abortControllerRef.current.signal
     };
 
     try{
@@ -100,7 +106,7 @@ function ChatWindow() {
         
          <div className='dropDownItem'><i class="fa-solid fa-gear"></i>Setting</div>
          <div className='dropDownItem'><i class="fa-solid fa-cloud-arrow-up"></i>Upgrade Plan</div>
-          <div className='dropDownItem'><i class="fa-solid fa-arrow-right-from-bracket"></i>Log out</div>
+          <div className='dropDownItem' onClick={onLogout}><i class="fa-solid fa-arrow-right-from-bracket"></i>Log out</div>
         </div>
     }
 

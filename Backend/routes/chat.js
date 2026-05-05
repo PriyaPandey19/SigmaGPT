@@ -1,8 +1,10 @@
 import express from "express";
 import Thread from "../models/Thread.js";
 import getOpenAPIRespone from "../utils/openai.js";
+import auth from "../middleware/auth.js";
 
 const router = express.Router();
+router.use(auth);
 
 router.post("/test", async(req, res) => {
     try{
@@ -23,7 +25,7 @@ router.post("/test", async(req, res) => {
 
 router.get("/thread", async(req, res) => {
     try{
-      const threads = await Thread.find({}).sort({updatedAt: -1});
+      const threads = await Thread.find({userId: req.user.userId}).sort({updatedAt: -1});
       res.json(threads);
     }catch(err){
       console.log(err);
@@ -35,7 +37,7 @@ router.get("/thread/:threadId", async(req, res) => {
     const {threadId} = req.params;
 
     try{
-        const thread = await Thread.findOne({threadId});
+        const thread = await Thread.findOne({threadId, userId: req.user.userId});
 
         if(!thread){
           return res.status(404).json({error: "Thread not found"});
@@ -50,7 +52,7 @@ router.get("/thread/:threadId", async(req, res) => {
 router.delete("/thread/:threadId",async(req,res)=>{
     const {threadId} = req.params;
     try{
-        const deletedThread = await Thread.findOneAndDelete({threadId});
+        const deletedThread = await Thread.findOneAndDelete({threadId, userId: req.user.userId});
 
         if(!deletedThread){
             res.status(404).json({error:"Thread not found"});
@@ -77,6 +79,7 @@ router.post("/chat", async(req, res) => {
         if(!thread){
             thread = new Thread({
                 threadId,
+                userId: req.user.userId,
                 title: message,
                 messages: [{role: "user", content: message}]
             });
@@ -98,5 +101,22 @@ router.post("/chat", async(req, res) => {
         res.status(500).json({error: "something went wrong"});
     }
 })
+
+
+router.patch("/thread/:threadId/rename", async(req, res) => {
+    const {threadId} = req.params;
+    const {title} = req.body;
+
+    try{
+        await Thread.findOneAndUpdate(
+            {threadId, userId: req.user.userId},
+            {title}
+        );
+        res.json({success: "Thread renamed"});
+    }catch(err){
+        console.log(err);
+        res.status(500).json({error: "Failed to rename"});
+    }
+});
 
 export default router;

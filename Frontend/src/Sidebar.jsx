@@ -1,16 +1,22 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Sidebar.css";
 import { MyContext } from "./MyContext";
 import {v1 as uuidv1} from "uuid";
 
 function Sidebar(){
 
-    const {allThreads, setAllThreads, currThreadId, setNewChat, setPrompt, setReply, setCurrThreadId, setPrevChats} = useContext(MyContext);
+    const {allThreads, setAllThreads, currThreadId, reply,setNewChat, setPrompt, setReply, setCurrThreadId, setPrevChats} = useContext(MyContext);
+    const[editingThreadId, setEditingThreadId] = useState(null);
+    const[editingTitle, setEditingTitle] = useState("");
 
     const getAllThreads = async() => {
+        const token = localStorage.getItem("token");
         try{
-            const response = await fetch("http://localhost:8080/api/thread");
+            const response = await fetch("http://localhost:8080/api/thread", {
+                headers: {"Authorization": `Bearer ${token}`}
+            });
             const res =await response.json();
+            if(!Array.isArray(res)) return;
             const filteredData = res.map(thread => ({threadId: thread.threadId, title: thread.title })); 
            // console.log(filteredData);
             setAllThreads(filteredData);
@@ -21,7 +27,7 @@ function Sidebar(){
     useEffect(() => {
         getAllThreads();
 
-    },[currThreadId]);
+    },[currThreadId, reply]);
 
 
     const createNewChat = () => {
@@ -33,10 +39,13 @@ function Sidebar(){
     }
 
     const changeThread = async(newThreadId) => {
+        const token = localStorage.getItem("token");
         setCurrThreadId(newThreadId);
 
         try{
-            const response = await fetch(`http://localhost:8080/api/thread/${newThreadId}`);
+            const response = await fetch(`http://localhost:8080/api/thread/${newThreadId}`, {
+                headers: { "Authorization": `Bearer ${token}`}
+            });
             const res = await response.json();
 
             console.log(res);
@@ -49,8 +58,9 @@ function Sidebar(){
     }
 
     const deleteThread = async(threadId) => {
+        const token = localStorage.getItem("token");
         try{
-            const response = await fetch(`http://localhost:8080/api/thread/${threadId}`, {method: "DELETE"});
+            const response = await fetch(`http://localhost:8080/api/thread/${threadId}`, {method: "DELETE", headers:{"Authorization": `Bearer ${token}`}});
             const res = await response.json();
             console.log(res);
 
@@ -60,7 +70,39 @@ function Sidebar(){
                 createNewChat();
             }
         }catch(err){
-            console.log(err);6        }
+            console.log(err);       }
+    }
+
+
+    const startEditing = (e, thread) => {
+        e.stopPropagation();
+        setEditingThreadId(thread.threadId);
+        setEditingTitle(thread.title);
+    }
+
+   const saveRename = async(threadId, title) => {  // 👈 accept title as param
+    if(!title.trim()) return cancelEditing();
+    const token = localStorage.getItem("token");
+
+    try{
+        await fetch(`http://localhost:8080/api/thread/${threadId}/rename`, {
+            method: "PATCH",
+            headers:{
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({title: title})  // 👈 use param not state
+        });
+        setAllThreads(prev => prev.map(t => t.threadId === threadId ? {...t, title: title}: t));
+    }catch(err){
+        console.log(err);
+    }
+    cancelEditing();
+}
+
+    const cancelEditing = () => {
+        setEditingThreadId(null);
+        setEditingTitle("");
     }
 
 
@@ -74,15 +116,34 @@ function Sidebar(){
             <ul className="history">
                 {
                     allThreads?.map((thread, idx) => (
-                        <li key={idx}
-                          onClick={(e) => changeThread(thread.threadId)}
-                          className={thread.threadId === currThreadId ? "highlighted": " "}
-                        >{thread.title}
-                          <i className="fa-solid fa-trash" onClick={(e) => {
-                            e.stopPropagation();
-                            deleteThread(thread.threadId);
-                          }}></i>
-                        </li>
+                       <li key={idx}
+    onClick={() => changeThread(thread.threadId)}
+    onDoubleClick={(e) => startEditing(e, thread)}  // 👈 add this
+    className={thread.threadId === currThreadId ? "highlighted" : " "}
+>
+    {editingThreadId === thread.threadId ? (   // 👈 add this block
+        <input
+            className="renameInput"
+            value={editingTitle}
+            onChange={(e) => setEditingTitle(e.target.value)}
+            onKeyDown={(e) => {
+                if(e.key === "Enter") saveRename(thread.threadId, editingTitle);
+                if(e.key === "Escape") cancelEditing();
+            }}
+            onBlur={() => saveRename(thread.threadId, editingTitle)}
+            onClick={(e) => e.stopPropagation()}
+            autoFocus
+        />
+    ) : (
+        <>
+            {thread.title}
+            <i className="fa-solid fa-trash" onClick={(e) => {
+                e.stopPropagation();
+                deleteThread(thread.threadId);
+            }}></i>
+        </>
+    )}
+</li>
 
                       
                     ))
@@ -90,7 +151,7 @@ function Sidebar(){
             </ul>
 
             <div className="sign">
-                <p>By Apna College &hearts;</p>
+                <p>By Priya Pandey &hearts;</p>
                 </div>            
         </section>
     )

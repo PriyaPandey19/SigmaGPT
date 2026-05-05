@@ -3,7 +3,8 @@ import axios from "axios";
 import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
-import chatRoutes from "./routes/chat.js"
+import chatRoutes from "./routes/chat.js";
+import authRoutes from "./routes/auth.js"
 
 dotenv.config();
 
@@ -12,7 +13,9 @@ const PORT = 8080;
 
 app.use(express.json());
 app.use(cors());
+app.use("/api/auth",authRoutes);
 app.use("/api", chatRoutes);
+
 
 app.listen(PORT, () => {
   console.log("Server running on port 8080");
